@@ -1,0 +1,43 @@
+---
+title: "Assignment 2"
+author: "Penny Jiang"
+date: "02/17/2023"
+output: html_document
+---
+
+#Assignment2 #Run an exploratory data analysis with R using the TEDS2016 dataset
+
+library(haven) \# clear your memory rm(list=ls()) TEDS_2016 \<-read_stata("https://github.com/datageneration/home/blob/master/DataProgramming/data/TEDS_2016.dta?raw=true")
+
+#Assgn label to the values 
+
+TEDS_2016$Tondu<-as.numeric(TEDS_2016$Tondu,labels=c("Unification now","Status quo,unif.infuture","Statusquo,decidelater","Statusquoforever","Statusquo,indep.infuture","Independencenow","No response"))
+
+#Check the variable 
+attach(TEDS_2016) 
+head(Tondu) 
+tail(Tondu)
+
+#Run a frequency table of the Party ID variable using the descr package
+
+#install.packages("descr")
+library(descr) 
+freq(TEDS_2016$Tondu)
+
+# Plot the Tondu variable
+library(ggplot2)
+ggplot(TEDS_2016, aes(Tondu)) + 
+  geom_bar()
+
+ggplot(TEDS_2016, aes(Tondu)) + 
+  geom_bar(aes(y = (..count..)/sum(..count..),fill=Tondu)) + 
+  scale_y_continuous(labels=scales::percent) +
+  ylab("Party Support (%)") + 
+  xlab("Tondu Status") +
+  theme_bw()
+  
+# From the chart, there is no values for the category of 7.5 for Tondu. 
+
+#It is obvious that there are missing data in hte dataset.we can try to impute them (e.g. average imputation or common point imputation).There are several dummy varialbes in the dataset, "notetsai" is one of the dummy baviables.
+
+#For numerical variables such as gender, age, income and education,etc., we can use liner regression model to find the correlate between them with Tondu or use scatterplots or barplt as a method of visualization to find the relationship between those independent variables and dependenat variable.
