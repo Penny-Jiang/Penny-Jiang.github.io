@@ -4,9 +4,8 @@ author: "Penny Jiang"
 date: "02/17/2023"
 output: html_document
 ---
-
+  
 # Import a stata file into R
-
 ```{r}
 library("haven")
 # clear your memory 
@@ -49,7 +48,7 @@ ggplot(TEDS_2016, aes(Tondu)) +
 ggplot(TEDS_2016, aes(Tondu)) + geom_bar(aes(y = (..count..)/sum(..count..),fill=Tondu)) + scale_y_continuous(labels=scales::percent) + ylab("Party Support (%)") + xlab("Tondu Status") + theme_bw()
 ```
 
-\# From the chart, there is no values for the category of 7.5 for Tondu.
+# From the chart, there is no values for the category of 7.5 for Tondu.
 
 #It is obvious that there are missing data in the dataset. We can try to impute them (e.g. average imputation or common point imputation). There are several dummy variables in the dataset, "notetsai" is one of the dummy variables.
 

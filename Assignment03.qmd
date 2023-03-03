@@ -4,6 +4,7 @@ author: "Penny Jiang"
 date: "02/17/2023"
 output: html_document
 ---
+  
 #Import a stata file into R
 ```{r}
 library("haven")
@@ -27,4 +28,3 @@ TEDS_2016_subset <- subset(TEDS_2016, select = c("Tondu","female","DPP","age","i
 #As the DV, Tondu, is categorical instead of numerical data, Linear regression analysis with regplot doesn't work for this model. Since regplot plots can enhance regression nomograms, and covariate distributions are superimposed on nomogram scales, a categorical variable is not able to apply to this model to enable interactive outcome calculation
 
 #logistic regression analysis called nominal or convert back Tondu in categorical data back to numerical data may work in a better way in regplot
-
