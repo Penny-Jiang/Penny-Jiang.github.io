@@ -1,0 +1,93 @@
+---
+title: "Text Mining 01"
+author: "Penny Jiang"
+date: "3/15/2023"
+output: html_document
+---
+
+#### Install the easypackages package
+
+```{r}
+### install.packages(c("easypackages","XML","wordcloud","RColorBrewer","NLP","tm","quanteda","quanteda.textstats"))
+library(easypackages)
+libraries("XML","wordcloud","RColorBrewer","NLP","tm","quanteda","quanteda.textstat
+")
+```
+
+#### Download text data from website
+
+```{r}
+mlkLocation <-URLencode("http://www.historyplace.com/speeches/churchill-hour.htm")
+```
+
+#### use htmlTreeParse function to read and parse paragraphs
+
+```{r}
+doc.html<- htmlTreeParse(mlkLocation, useInternal=TRUE)
+mlk <- unlist(xpathApply(doc.html, '//p', xmlValue))
+mlk
+head(mlk, 3)
+```
+
+#### Vectorize mlk
+
+```{r}
+words.vec <- VectorSource(mlk)
+```
+
+#### Check the class of words.vec
+
+```{r}
+class(words.vec)
+```
+
+#### Create Corpus object for preprocessing
+
+```{r}
+words.corpus <- Corpus(words.vec)
+inspect(words.corpus)
+```
+
+#### Turn all words to lower case
+
+```{r}
+words.corpus <- tm_map(words.corpus, content_transformer(tolower))
+```
+
+#### Remove punctuations, numbers
+
+```{r}
+words.corpus <- tm_map(words.corpus, removePunctuation)
+words.corpus <- tm_map(words.corpus, removeNumbers)
+```
+
+#### How about stopwords, then uniform bag of words created
+
+```{r}
+words.corpus <- tm_map(words.corpus, removeWords, stopwords("english"))
+```
+
+#### Create Term Document Matrix
+
+```{r}
+tdm <- TermDocumentMatrix(words.corpus)
+inspect(tdm)
+
+m <- as.matrix(tdm)
+wordCounts <- rowSums(m)
+wordCounts <- sort(wordCounts, decreasing=TRUE)
+head(wordCounts)
+```
+
+#### Create Wordcloud
+
+```{r}
+cloudFrame<-data.frame(word=names(wordCounts),freq=wordCounts)
+set.seed(1234)
+wordcloud(cloudFrame$word,cloudFrame$freq)
+wordcloud(names(wordCounts),wordCounts, min.freq=3,random.order=FALSE, max.words=500,scale=c(3,.5), rot.per=0.35,colors=brewer.pal(8,"Dark2"))
+```
+
+#### Run the program on Winston Churchill's Finest Hour speech?
+
+#### http://www.historyplace.com/speeches/churchill-hour.htm
