@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Penny Jiang">
+<meta name="dcterms.date" content="2023-04-02">
+
+<title>Assignment06_07</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Assignment06_07_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Assignment06_07_files/libs/quarto-html/quarto.js"></script>
+<script src="Assignment06_07_files/libs/quarto-html/popper.min.js"></script>
+<script src="Assignment06_07_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Assignment06_07_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Assignment06_07_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Assignment06_07_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Assignment06_07_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Assignment06_07_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Assignment06_07_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Assignment06_07</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Penny Jiang </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 2, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="what-is-lda" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-lda">1. What is LDA</h4>
+<ul>
+<li>Linear Discriminant Analysis (LDA) is a supervised machine learning algorithm used for classification problems</li>
+</ul>
+</section>
+<section id="a.-what-isare-the-requirementsof-lda" class="level4">
+<h4 class="anchored" data-anchor-id="a.-what-isare-the-requirementsof-lda">2a. What is/are the requirement(s)of LDA?</h4>
+<ul>
+<li>Upon both book and ChatGPT, the requirements of LDA include:
+<ol type="a">
+<li>Labeled Data: LDA requires a labeled data-set, where each data point is labeled with its corresponding class or category. This labeled data is used to train the model to classify new, unlabeled data..</li>
+<li>Linear Separability: LDA assumes that the data is linearly separable, which means that the classes can be separated by a linear boundary or hyper-plane in the feature space. If the data is not linearly separable, LDA may not provide accurate results.</li>
+<li>Normality: LDA assumes that the features are normally distributed within each class. If the data is not normally distributed, LDA may not be the best algorithm to use.</li>
+<li>Equal Covariance Matrices: LDA assumes that the covariance matrix is equal across all classes. If the covariance matrix is not equal, LDA may not provide accurate results.</li>
+<li>Large Sample Size: LDA performs best when the sample size is large relative to the number of features. If the sample size is small, LDA may over-fit or under-fit the data.</li>
+<li>No Multicollinearity: LDA assumes that there is no multicollinearity, which means that the features are not highly correlated with each other. If there is multicollinearity, LDA may not provide accurate results.</li>
+</ol></li>
+</ul>
+</section>
+<section id="b.-how-lda-is-different-from-logistic-regression" class="level4">
+<h4 class="anchored" data-anchor-id="b.-how-lda-is-different-from-logistic-regression">2b. How LDA is different from Logistic Regression?</h4>
+<ul>
+<li>LDA uses least square estimation while logistic regression relies on maximum likelihood estimation.</li>
+<li>LDA works best when predicted and predictor variables are continuous (not categorical) and follow a normal distribution. In logistic regression, a predictor is a binary variable and it works well with categorical variables as predictors.</li>
+</ul>
+</section>
+<section id="c.-what-is-roc" class="level4">
+<h4 class="anchored" data-anchor-id="c.-what-is-roc">2c. What is ROC ?</h4>
+<ul>
+<li>An ROC curve (receiver operating characteristic curve) is a graph showing the performance of a classification model at all classification thresholds. This curve plots two parameters: True Positive Rate. False Positive Rate</li>
+</ul>
+</section>
+<section id="d.-what-is-sensitivity-and-specificity-which-is-more-important-in-your-opinion" class="level4">
+<h4 class="anchored" data-anchor-id="d.-what-is-sensitivity-and-specificity-which-is-more-important-in-your-opinion">2d. What is sensitivity and specificity? Which is more important in your opinion?</h4>
+<ul>
+<li>Sensitivity and specificity are statistical measures of the performance of a classification test or screening test, rather than a regression model.</li>
+</ul>
+<p>In a classification model, sensitivity measures the proportion of true positive cases that are correctly identified by the model, while specificity measures the proportion of true negative cases that are correctly identified by the model. - sensitivity = true positive / (true positive + false negative) - specificity = true negative / (true negative + false positive)</p>
+<p>Where:</p>
+<ul>
+<li>true positive: number of positive cases correctly identified as positive by the model</li>
+<li>false positive: number of negative cases incorrectly identified as positive by the model</li>
+<li>true negative: number of negative cases correctly identified as negative by the model</li>
+<li>false negative: number of positive cases incorrectly identified as negative by the model</li>
+</ul>
+<p>sensitivity and specificity are often used together to evaluate the overall performance of a classification model, and they are affected by the choice of threshold (i.e., the probability threshold used to classify a case as positive or negative). A high sensitivity means that the model is good at identifying positive cases, while a high specificity means that the model is good at identifying negative cases.</p>
+<p>Both are important to evaluate a classification model!</p>
+</section>
+<section id="e.-based-on-the-chart-for-the-purpose-of-prediction-which-is-more-critical" class="level4">
+<h4 class="anchored" data-anchor-id="e.-based-on-the-chart-for-the-purpose-of-prediction-which-is-more-critical">2e. Based on the chart, for the purpose of prediction, which is more critical?</h4>
+<ul>
+<li>In line with the above, false negative seems most critical. Also, false positive can have serious consequences on a person’s wellbeing.</li>
+</ul>
+</section>
+<section id="calculate-the-prediction-error" class="level4">
+<h4 class="anchored" data-anchor-id="calculate-the-prediction-error">3. Calculate the prediction error</h4>
+<ul>
+<li>23/9,667=0.2% false positives and 252/333=75.7% false negatives</li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

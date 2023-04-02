@@ -1,0 +1,51 @@
+---
+title: "Assignment06_07"
+author: "Penny Jiang"
+date: "4/2/2023"
+output: html_document
+---
+
+#### 1. What is LDA
+- Linear Discriminant Analysis (LDA) is a supervised machine learning algorithm used for classification problems
+
+#### 2a. What is/are the requirement(s)of LDA?
+- Upon both book and ChatGPT, the requirements of LDA include:
+     a) Labeled Data: LDA requires a labeled data-set, where each data point is labeled with its corresponding class or category. This labeled data is used to train the model to classify new, unlabeled data..
+     b) Linear Separability: LDA assumes that the data is linearly separable, which means that the classes can be separated by a linear boundary or hyper-plane in the feature space. If the data is not linearly separable, LDA may not provide accurate results.
+     c) Normality: LDA assumes that the features are normally distributed within each class. If the data is not normally distributed, LDA may not be the best algorithm to use.
+     d) Equal Covariance Matrices: LDA assumes that the covariance matrix is equal across all classes. If the covariance matrix is not equal, LDA may not provide accurate results.
+     e) Large Sample Size: LDA performs best when the sample size is large relative to the number of features. If the sample size is small, LDA may over-fit or under-fit the data.
+     f) No Multicollinearity: LDA assumes that there is no multicollinearity, which means that the features are not highly correlated with each other. If there is multicollinearity, LDA may not provide accurate results.
+
+#### 2b. How LDA is different from Logistic Regression?
+-   LDA uses least square estimation while logistic regression relies on maximum likelihood estimation.
+-   LDA works best when predicted and predictor variables are continuous (not categorical) and follow a normal distribution. In logistic regression, a predictor is a binary variable and it works well with categorical variables as predictors.
+
+#### 2c. What is ROC ?
+- An ROC curve (receiver operating characteristic curve) is a graph showing the performance of a classification model at all classification thresholds. This curve plots two parameters: True Positive Rate. False Positive Rate
+
+#### 2d. What is sensitivity and specificity? Which is more important in your opinion?
+-   Sensitivity and specificity are statistical measures of the performance of a classification test or screening test, rather than a regression model.
+
+In a classification model, sensitivity measures the proportion of true positive cases that are correctly identified by the model, while specificity measures the proportion of true negative cases that are correctly identified by the model.
+ - sensitivity = true positive / (true positive + false negative)
+ - specificity = true negative / (true negative + false positive)
+
+Where:
+
+ - true positive: number of positive cases correctly identified as positive by the model
+ - false positive: number of negative cases incorrectly identified as positive by the model
+ - true negative: number of negative cases correctly identified as negative by the model
+ - false negative: number of positive cases incorrectly identified as negative by the model
+
+sensitivity and specificity are often used together to evaluate the overall performance of a classification model, and they are affected by the choice of threshold (i.e., the probability threshold used to classify a case as positive or negative). A high sensitivity means that the model is good at identifying positive cases, while a high specificity means that the model is good at identifying negative cases.
+
+Both are important to evaluate a classification model!
+
+#### 2e. Based on the chart, for the purpose of prediction, which is more critical?
+
+-   In line with the above, false negative seems most critical. Also, false positive can have serious consequences on a person's wellbeing.
+
+#### 3. Calculate the prediction error
+
+-   23/9,667=0.2% false positives and 252/333=75.7% false negatives
