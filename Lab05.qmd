@@ -1,0 +1,177 @@
+---
+title: "Linear Regression"
+author: "Penny Jiang"
+date: "3/30/2023"
+output: html_document
+---
+
+###### Knowledge Mining: Linear regression 
+###### File: Lab_linearregression01.R 
+###### Theme: Linear regression 
+###### Data: MASS, ISLR 
+###### Adapted from ISLR Chapter 3 Lab
+---
+
+##### install.packages("easypackages","MASS","ISLR2","arm")
+```{r}
+library(easypackages)
+libraries("arm","MASS","ISLR2")
+```
+
+##### Load datasets from MASS and ISLR packages
+
+```{r}
+attach(Boston)
+```
+
+##### Get names
+
+```{r}
+names(Boston)
+```
+
+##### What is the Boston dataset?
+
+```{r}
+## The Boston data-set is a well-known collection of data that contains information about different aspects of residential homes in Boston, Massachusetts. The data-set was created by Harrison and Rubinfeld in the 1970s and has since been used extensively in the field of machine learning and statistics as a benchmark data-set for regression tasks.
+```
+
+##### Simple linear regression
+
+```{r}
+plot(medv~lstat,Boston, pch=20, cex=.8, col="steelblue")
+fit1=lm(medv~lstat,data=Boston)
+fit1
+summary(fit1)
+abline(fit1,col="orange")
+names(fit1)
+confint(fit1) # confidence intervals
+```
+
+#### Predictions using values in lstat
+
+```{r}
+predict(fit1,data.frame(lstat=c(0,5,10,15)),interval="confidence") # confidence intervals
+predict(fit1,data.frame(lstat=c(0,5,10,15)),interval="prediction") # prediction intervals
+```
+
+##### Prediction interval uses sample mean and takes into account the variability of the estimators for μ and σ.
+##### Therefore, the interval will be wider.
+
+##### Multiple linear regression
+```{r}
+fit2=lm(medv~lstat+age,data=Boston)
+summary(fit2)
+fit3=lm(medv~.,Boston)
+summary(fit3)
+par(mfrow=c(2,2))
+plot(fit3,pch=20, cex=.8, col="green")
+mtext("fit3", side = 3, line = - 2, cex = 2, outer = TRUE)
+```
+
+#### Update function to respecify the model, i.e. remove age and indus variables
+```{r}
+fit4=update(fit3,~.-age-indus)
+summary(fit4)
+```
+
+#### Set the next plot configuration
+
+```{r}
+par(mfrow=c(2,2))
+plot(fit4,pch=20, cex=.8, col="green")
+mtext("fit4", side = 3, line = - 2, cex = 2, outer = TRUE)
+```
+
+#### Uses coefplot to plot coefficients. Note the line at 0.
+
+```{r}
+par(mfrow=c(1,1))
+arm::coefplot(fit4)
+```
+
+#### Nonlinear terms and Interactions
+
+```{r}
+fit5=lm(medv~lstat*age,Boston) # include both variables and the interaction term x1:x2
+summary(fit5)
+```
+
+#### I() identity function for squared term to interpret as-is
+
+#### Combine two command lines with semicolon
+
+```{r}
+fit6=lm(medv~lstat +I(lstat^2),Boston); summary(fit6)
+par(mfrow=c(1,1))
+plot(medv~lstat, pch=20, col="forestgreen")
+points(lstat,fitted(fit6),col="red",pch=20)
+fit7=lm(medv~poly(lstat,4))
+points(lstat,fitted(fit7),col="blue",pch=20)
+```
+
+#### Qualitative predictors
+
+```{r}
+names(Carseats)
+summary(Carseats)
+fit1=lm(Sales~.+Income:Advertising+Age:Price,Carseats) # add two interaction terms
+summary(fit1)
+attach(Carseats)
+contrasts(Carseats$ShelveLoc) # what is contrasts function?
+?contrasts
+```
+
+#### Writing an R function to combine the lm, plot and abline functions to 
+#### create a one step regression fit plot function
+
+```{r}
+regplot=function(x,y){
+  fit=lm(y~x)
+  plot(x,y)
+  abline(fit,col="orange")
+}
+attach(Carseats)
+regplot(Price,Sales)
+```
+
+#### Allow extra room for additional arguments/specifications
+
+```{r}
+regplot=function(x,y,...){
+  fit=lm(y~x)
+  plot(x,y,...)
+  abline(fit,col="orange")
+}
+regplot(Price,Sales,xlab="Price",ylab="Sales",col="green",pch=20)
+```
+
+#### Additional note: try out the coefplot2 package to finetune the coefplots
+
+```{r}
+## install.packages("reshape")
+## install.packages("coefplot2", repos="http://www.math.mcmaster.ca/bolker/R", type="source")
+```
+
+#### Exercise
+
+#### Try other combination of interactive terms
+
+```{r}
+fit1=lm(Sales~.+Income:Education+Advertising:Price,Carseats) # add two interaction terms
+summary(fit1)
+```
+
+#### How to interpret interactive terms?
+
+```{r}
+## Interaction term needs to be included if it makes sense conceptually ( the effect of one independent variable on DV is likely dependent on the effect of another independent variable). As for interpreting the interaction term, if it is insignificant, we may remove it from the model. We only interpret the interaction term, not the independent variables used to create it, because the relative importance of individual predictors is difficult to understand if interaction effects are significant because it implies uncertainty about the relative importance of main effects
+```
+
+##### Read: Brambor, T., Clark, W.R. and Golder, M., 2006. Understanding interaction models: Improving empirical analyses. Political analysis, 14(1), pp.63-82.
+
+##### What are qualitative variables? What class should they be?
+
+```{r}
+## Qualitative variables are variables that are not numerical.They belong to a nonnumerical or categorical class.
+```
