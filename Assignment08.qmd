@@ -1,0 +1,69 @@
+---
+title: "Assignment08_Chapter6"
+author: "Penny Jiang"
+date: "4/17/2023"
+output: html_document
+---
+  
+##### From the three methods (best subset, forward stepwise, and backward stepwise):
+- a.Which of the three models with k predictors has the smallest training RSS? 
+  - Best subset method is the one out of three models with k predictors has the smallest training RSS because it is selected from among all k predictors models.
+
+- b.Which of the three models with k predictors has the smallest test RSS? 
+  - Best subset method is the one out of the three models with K predictors has the smallest test RSS because it takes into account more models than the other methods. 
+
+##### Generate simulated data, and then use this data to perform best subset selection.
+
+###### 1.Use the rnorm() function to generate a predictor X of length n = 100, as well as a noise vector 𝜀of length n = 100. 
+```{r}
+set.seed(1)
+X= rnorm(100)
+eps = rnorm(100)
+```
+
+###### 2.Generate a response vector 𝑦of length n = 100 according to the model:𝑦=β0+β1𝑥+β2𝑥2+β3𝑥3+ε, 𝑦=β0+β1𝑥+β2𝑥2+β3𝑥3+ε where β0,β1,β2𝑎𝑛𝑑β3  are 4, 9, 2, 1 respectively.
+```{r}
+Y <- 4 + 9*X + 2*X^2 + 1*X^3 + eps
+```
+
+##### 2a. Plot X and Y
+```{r}
+plot(X, Y)
+```
+
+##### 3.Use the leaps package
+```{r}
+require(leaps)
+library(leaps)
+```
+
+##### 4.Use the regsubsets() function from the leaps packageto perform best subset selection in order to choose the best model containing the predictors. X, X^2 ... X^10. Hint: regsubsets(Y~poly(X,10,raw=T), data=data.frame(Y,X), nvmax=10)
+```{r}
+df <- data.frame(y=Y, x=X)
+fit <- regsubsets(Y ~ poly(X, 10, raw=T), data =data.frame(Y,X), nvmax = 10)
+fit.summary <- summary(fit)
+names(fit)
+```
+
+##### 4a. What is the best model obtained according to Cp, BIC, and adjusted 𝑅2? 
+```{r}
+which.min(fit.summary$cp)
+which.min(fit.summary$bic)
+which.min(fit.summary$adjr2)
+```
+
+##### 4b. Show some plots to provide evidence for your answer, and report the coefficients of the best model obtained. Note you will need to use the data.frame() function to create a single data set containing both 𝑥and 𝑦.
+```{r}
+plot(fit.summary$cp, xlab="Subset Size", ylab="Cp", pch=30, type="l")
+points(3, fit.summary$cp[3], pch=4, col="red", lwd=7)
+plot(fit.summary$bic, xlab="Subset Size", ylab="BIC", pch=30, type="l")
+points(3, fit.summary$bic[3], pch=4, col="red", lwd=7)
+plot(fit.summary$adjr2, xlab="Subset Size", ylab="Adjusted R2", pch=30, type="l")
+points(3, fit.summary$adjr2[3], pch=4, col="red", lwd=7)
+# Finding: With Cp, BIC and Adjusted R2 criteria, 3, 3, and 3 variable models are picked respectively.
+```
+##### 4c. Find coefficients
+```{r}
+coefficients(fit, id=4)
+```
+
